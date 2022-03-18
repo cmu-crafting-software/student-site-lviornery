@@ -1,72 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Embedding Vega-Lite</title>
-    <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <style type="text/css">
-      * {
-        font-family: "Open Sans";
-        font-weight: 300;
-      }
-      .regular {
-        font-weight: 400;
-      }
-      .semibold {
-        font-weight: 600;
-      }
-      body {
-        max-width: max-content;
-        margin: auto;
-      }
-      #title,
-      #name {
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="title">
-      <h1 class="semibold" style="margin-bottom: 0px">Embedding Vega-Lite</h1>
-    </div>
-    <div id="name">
-      <em>Crafting software recitation 7</em>
-    </div>
-    <br />
-    <div id="vis"></div>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.17.0"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+    <h1> THE CHART</h1>
+    <p>This is an example streamgraph from the altair examples. It shows employment over time. It's very pretty. It looks like music.</p>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/unemployment-across-industries.json"}, "mark": "area", "encoding": {"color": {"field": "series", "scale": {"scheme": "category20b"}, "type": "nominal"}, "x": {"axis": {"domain": false, "format": "%Y", "tickSize": 0}, "field": "date", "timeUnit": "yearmonth", "type": "temporal"}, "y": {"aggregate": "sum", "axis": null, "field": "count", "stack": "center", "type": "quantitative"}}, "selection": {"selector001": {"type": "interval", "bind": "scales", "encodings": ["x", "y"]}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"};
+      var embedOpt = {"mode": "vega-lite"};
 
-    <script type="text/javascript">
-      var yourVlSpec = {
-        $schema: "https://vega.github.io/schema/vega-lite/v5.json",
-        description: "A simple bar chart with embedded data.",
-        height: 500,
-        width: 500,
-        data: {
-          values: [
-            { a: "A", b: 28 },
-            { a: "B", b: 55 },
-            { a: "C", b: 43 },
-            { a: "D", b: 91 },
-            { a: "E", b: 81 },
-            { a: "F", b: 53 },
-            { a: "G", b: 19 },
-            { a: "H", b: 87 },
-            { a: "I", b: 52 },
-          ],
-        },
-        mark: "bar",
-        encoding: {
-          x: { field: "a", type: "ordinal" },
-          y: { field: "b", type: "quantitative" },
-        },
-      };
-      vegaEmbed("#vis", yourVlSpec);
-    </script>
-  </body>
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
 </html>
