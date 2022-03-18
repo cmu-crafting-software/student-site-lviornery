@@ -1,17 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-    .error {
-        color: red;
-    }
-  </style>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.17.0"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
-</head>
+    <title>Embedding Vega-Lite</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <style type="text/css">
+      * {
+        font-family: "Open Sans";
+        font-weight: 300;
+      }
+      .regular {
+        font-weight: 400;
+      }
+      .semibold {
+        font-weight: 600;
+      }
+      body {
+        max-width: max-content;
+        margin: auto;
+      }
+      #title,
+      #name {
+        text-align: center;
+      }
+    </style>
+  </head>
 <body>
-    <h1> THE CHART</h1>
+    <div id="title">
+      <h1 class="semibold" style="margin-bottom: 0px">THE CHART</h1>
+    </div>
+    <div id="name">
+      <em>Crafting software recitation 7</em>
+    </div>
+    <br />
     <p>This is an example streamgraph from the altair examples. It shows employment over time. It's very pretty. It looks like music.</p>
   <div id="vis"></div>
   <script>
